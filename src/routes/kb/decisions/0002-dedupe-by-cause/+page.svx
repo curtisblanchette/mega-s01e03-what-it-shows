@@ -1,0 +1,59 @@
+---
+layout: runbook
+title: '0002 · Split #4471 and triage by cause'
+owner: Curtis Blanchette
+status: proposed
+reviewed: '2026-10-28'
+signature: 'Curtis Blanchette / Codex / S01E03'
+---
+
+<script>
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import QueueTimeline from '#lib/kb/QueueTimeline.svelte';
+  import DedupeExplorer from '#lib/kb/DedupeExplorer.svelte';
+  import IncidentAudit from '#lib/kb/IncidentAudit.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+## Decision proposed
+
+Split the reports in [incident #4471](/kb/incidents/4471) by demonstrated cause and maintain a separate engineering ticket for each problem. Matching subjects and intake tags are search aids, not evidence that two reports need the same fix.
+
+This record proposes replacing [decision 0001](/kb/decisions/0001-dedupe-by-subject) and the [subject-only triage rule](/kb/triage/dedupe). The accepted historical decision stays unchanged. Its old review date and the disagreement between its prose and the running examples require a new review by the support desk before adoption.
+
+## Separate repairs
+
+**Parser:** the shared parser reads month first even when the tenant writes day first. Resolve the tenant's locale, parse accordingly, and reject ambiguous inputs when the intended format is unknown. Example: Harbour Dental's 7 April reminder went out on 4 July (R-41200).
+
+**Form hint:** booking-v3 prints `MM/DD/YYYY` for day-first tenants while its form reader interprets the entry using the tenant's day-first order. Align the displayed hint, validation and parsing. Correcting only the shared parser does not fix this misleading instruction. Copper Studio, Alder Physio and Pale Harbour have affected form reports.
+
+<CauseTable ticket={4471} />
+
+These figures execute the exported classifier against tenant records. The table's original-ticket marker records the source merge, not the ownership of the new GitHub issues. See the accompanying issue drafts and membership audit for every report ID.
+
+<IncidentAudit />
+
+## The queue keeps moving
+
+<QueueTimeline ticket={4471} />
+
+This is an export dated 4 October 2026, not a live queue. Before filing or changing an issue, refresh the desk's current tickets and comments, read ownership changes and search for an existing issue for the same cause. Reuse a current cause ticket if one exists; do not duplicate work created while this review was running. Preserve arrival and merge timestamps separately and record the source snapshot with each count.
+
+## Triage procedure
+
+- Deduplicate export rows by report ID before counting. Review conflicting versions instead of silently discarding a newer report.
+- Read the body, resolve the tenant, and check its locale and booking form. Browser locale and intake tags can disagree with that tenant configuration.
+- Compare the causal path and expected repair. Different subjects can share a cause; identical subjects can have different causes.
+- With no known tenant or insufficient evidence, keep the report unplaced and request details. Never merge merely because both causes are unknown.
+- Attach unique report IDs and a recomputed count to the appropriate issue; preserve unusual symptoms for investigation without counting them twice.
+- Require separate acceptance checks for parser and form-hint repairs, then reconcile the current queue again before closing the incident.
+
+<DedupeExplorer />
+
+## Acceptance checks and limits
+
+For the parser, test day-first tenants through app and email intake and booking-v2, including ambiguous day/month pairs and invalid dates. For booking-v3, test that the printed format matches the reader for every affected day-first tenant. Include month-first tenants as controls.
+
+Re-run the export analysis and render the KB after source data changes. The report grouping is reproducible evidence from this snapshot; it is not a claim that either repair has shipped or that every timing symptom has been explained.
+
+<RenderStamp {signature} />

@@ -1,0 +1,9 @@
+{
+  "sourceZipSha256": "267efc5ea61aca6efaaca842160ac4d0377d56bcbf5123e61c604d6ae99597f2",
+  "originalSourceFilesUnchanged": true,
+  "renderedCountsAndSignatureVerified": true,
+  "renderedPage": "rendered/kb/decisions/0002-dedupe-by-cause/index.html",
+  "build": "npm run build passed",
+  "analysis": "npm run analyze passed",
+  "browser": "Brave through Orca: title, cause table, dedupe examples and desk reference verified"
+}
