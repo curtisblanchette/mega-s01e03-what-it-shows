@@ -21,7 +21,16 @@ Split the reports in [incident #4471](/kb/incidents/4471) by demonstrated cause 
 
 This record proposes replacing [decision 0001](/kb/decisions/0001-dedupe-by-subject) and the [subject-only triage rule](/kb/triage/dedupe). The accepted historical decision stays unchanged. Its old review date and the disagreement between its prose and the running examples require a new review by the support desk before adoption.
 
-## Separate repairs
+## Engineering outcome — 5 October 2026
+
+The [course desk update](https://hq.mega.dev/challenges/what-it-shows) now marks original ticket #4471 closed.
+
+- **Parser: fixed**, with `fix(dates): parse dd/mm for eu locales`. Our [parser issue](https://github.com/curtisblanchette/mega-s01e03-what-it-shows/issues/1) is closed as completed.
+- **Hint: won’t fix**, because booking-v3 was retired. Our [hint issue](https://github.com/curtisblanchette/mega-s01e03-what-it-shows/issues/2) is closed as not planned. Retirement is not a hint-code repair.
+
+These are the desk’s reported outcomes, not changes implemented in this KB. The historical report counts stay unchanged. The timing exceptions below remain recorded without a separate confirmed cause. The cause-based triage decision remains a proposal for the desk to adopt.
+
+## Separate repairs identified in the export
 
 **Parser:** the shared parser reads month first even when the tenant writes day first. Resolve the tenant's locale, parse accordingly, and reject ambiguous inputs when the intended format is unknown. Example: Harbour Dental's 7 April reminder went out on 4 July (R-41200).
 
@@ -54,6 +63,6 @@ This is an export dated 4 October 2026, not a live queue. Before filing or chang
 
 For the parser, test day-first tenants through app and email intake and booking-v2, including ambiguous day/month pairs and invalid dates. For booking-v3, test that the printed format matches the reader for every affected day-first tenant. Include month-first tenants as controls.
 
-Re-run the export analysis and render the KB after source data changes. The report grouping is reproducible evidence from this snapshot; it is not a claim that either repair has shipped or that every timing symptom has been explained.
+Re-run the export analysis and render the KB after source data changes. The report grouping is reproducible evidence from this snapshot; the engineering outcomes above come from the later desk update, while the timing symptoms remain unexplained by the export.
 
 <RenderStamp {signature} />

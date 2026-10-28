@@ -56,3 +56,7 @@ The complete static site, including its interactive assets, is committed under `
 Serve that directory over HTTP; GitHub's file viewer displays source HTML rather than the rendered page.
 
 Counts follow the exported tenant-based classifier, not intake tags or subjects. Five timing exceptions remain within the parser count and are explicitly unresolved. The export is a snapshot of 4 October, not a live desk feed. Before changing issues, read their latest state and comments and reconcile work already done.
+
+### Desk update
+
+After the first submission, the course reported #4471 closed on 5 October: [parser #1](https://github.com/curtisblanchette/mega-s01e03-what-it-shows/issues/1) fixed (completed); [hint #2](https://github.com/curtisblanchette/mega-s01e03-what-it-shows/issues/2) won’t fix because booking-v3 was retired (not planned). See `evidence/desk-update.json`. Counts are historical; the triage proposal still awaits adoption.
