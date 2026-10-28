@@ -13,6 +13,8 @@ for (const r of raw) { if (seen.has(r.id)) assert.deepEqual(r, seen.get(r.id), '
 const notes = read('src/lib/data/desk-notes.json').oneDayMove;
 const monthCounts = field => Object.fromEntries(Object.entries(Object.groupBy(reports, r => r[field].slice(0,7))).map(([k,v]) => [k,v.length]));
 const delays = reports.map(r => (Date.parse(r.mergedAt) - Date.parse(r.receivedAt))/86400000).sort((a,b)=>a-b);
+const pageSource = fs.readFileSync('src/routes/kb/decisions/0002-dedupe-by-cause/+page.svx','utf8');
+const signature = JSON.parse(pageSource.match(/^signature: (.+)$/m)[1]);
 const summary = {
   rawRows: raw.length, uniqueReports: reports.length, duplicateRows: raw.length-reports.length,
   intakeDisagreements: reports.filter(r => r.meta.intakeTag !== causeOf(r, tenantOf(r))).length,
@@ -22,7 +24,7 @@ const summary = {
   beforeJuly: reports.filter(r=>r.receivedAt < '2026-07-01').length,
   mergedJuly2: reports.filter(r=>r.mergedAt.startsWith('2026-07-02')).length,
   lagDays: {max: delays.at(-1), median: (delays[205]+delays[206])/2},
-  signature: 'Curtis Blanchette / Codex / S01E03', deskRef: deskRef('Curtis Blanchette / Codex / S01E03')
+  signatureSource: 'page frontmatter: course-issued ticket', deskRef: deskRef(signature)
 };
 assert.equal(reports.length, 412);
 assert.deepEqual(Object.fromEntries(groups.map(g=>[g.cause,g.reports.length])), {parser:379,hint:33});

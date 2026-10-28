@@ -4,7 +4,7 @@ title: '0002 · Split #4471 and triage by cause'
 owner: Curtis Blanchette
 status: proposed
 reviewed: '2026-10-28'
-signature: 'Curtis Blanchette / Codex / S01E03'
+signature: "v1.eyJzdWIiOiIyMzk4IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMyMDk3NTgsImV4cCI6MTc5MzI5NjE1OH0.5Sszg_Inw73T1MYcRe_4iNDZk6CMfVY1maMQqzCD69A"
 ---
 
 <script>
